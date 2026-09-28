@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Acceso seguro al sistema del taller mecánico.">
+  <title>TallerPro | Acceso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="auth-layout">
+    <section class="brand-panel" aria-label="Información del sistema">
+      <div class="brand"><span class="brand-mark">TP</span><span>TALLER<span>PRO</span></span></div>
+      <div class="brand-copy">
+        <p class="eyebrow">GESTIÓN OPERATIVA</p>
+        <h1>Tu taller, siempre bajo control.</h1>
+        <p>Centraliza la recepción, diagnóstico y seguimiento de cada vehículo desde un solo lugar.</p>
+      </div>
+      <div class="features">
+        <p><b>✓</b> Historial completo por vehículo</p>
+        <p><b>✓</b> Seguimiento de órdenes en tiempo real</p>
+        <p><b>✓</b> Información protegida por roles</p>
+      </div>
+      <small>© <span id="year"></span> TallerPro. Gestión profesional.</small>
+    </section>
+
+    <section class="form-panel">
+      <div class="form-container">
+        <div id="login-view">
+          <p class="eyebrow">BIENVENIDO DE NUEVO</p>
+          <h2>Inicia sesión</h2>
+          <p class="intro">Ingresa tus credenciales para continuar al sistema.</p>
+          <form id="login-form" novalidate>
+            <div class="field">
+              <label for="email">Correo electrónico</label>
+              <div class="input-wrap"><i>@</i><input id="email" type="email" autocomplete="email" placeholder="nombre@taller.com" required></div>
+              <small class="error" id="email-error"></small>
+            </div>
+            <div class="field">
+              <div class="label-row"><label for="password">Contraseña</label><button type="button" class="link" data-view="recovery">¿Olvidaste tu contraseña?</button></div>
+              <div class="input-wrap"><i>⌁</i><input id="password" type="password" autocomplete="current-password" placeholder="Ingresa tu contraseña" required minlength="8"><button type="button" class="toggle" aria-label="Mostrar contraseña" aria-pressed="false">Mostrar</button></div>
+              <small class="error" id="password-error"></small>
+            </div>
+            <label class="remember"><input type="checkbox"> Recordar mi sesión en este equipo</label>
+            <p class="message" id="login-message" role="status" aria-live="polite"></p>
+            <button class="primary" type="submit">Ingresar al sistema <span>→</span></button>
+          </form>
+          <p class="security">◈ Acceso protegido y conexión cifrada.</p>
+        </div>
+
+        <div id="recovery-view" hidden>
+          <button type="button" class="back" data-view="login">← Volver a iniciar sesión</button>
+          <p class="eyebrow">RECUPERAR ACCESO</p>
+          <h2>Recupera tu contraseña</h2>
+          <p class="intro">Escribe tu correo y te enviaremos instrucciones para restablecerla.</p>
+          <form id="recovery-form" novalidate>
+            <div class="field">
+              <label for="recovery-email">Correo electrónico</label>
+              <div class="input-wrap"><i>@</i><input id="recovery-email" type="email" autocomplete="email" placeholder="nombre@taller.com" required></div>
+              <small class="error" id="recovery-email-error"></small>
+            </div>
+            <p class="message" id="recovery-message" role="status" aria-live="polite"></p>
+            <button class="primary" type="submit">Enviar instrucciones <span>→</span></button>
+          </form>
+          <aside><strong>¿No tienes acceso al correo?</strong><br>Contacta al administrador de tu taller para recuperar tu cuenta.</aside>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
