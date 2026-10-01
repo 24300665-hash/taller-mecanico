@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Registro seguro de clientes",
+    "output": ".archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+    "locale": "es",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "staff", "type": "external", "label": "Personal del taller", "sublabel": "No autenticado / Administrador / Recepcionista", "pos": [40, 205], "size": [180, 76] },
+    { "id": "browser", "type": "frontend", "label": "Navegador", "sublabel": "HTML, CSS y JavaScript", "pos": [342, 205], "size": [180, 76] },
+    { "id": "api", "type": "backend", "label": "API Express", "sublabel": "Sesión HttpOnly · validación · Multer", "pos": [700, 205], "size": [220, 84], "tag": "ADMINISTRADOR / RECEPCIONISTA" },
+    { "id": "mysql", "type": "database", "label": "MySQL", "sublabel": "usuarios y clientes · índices únicos", "pos": [1040, 110], "size": [190, 76] },
+    { "id": "images", "type": "cloud", "label": "Almacenamiento local", "sublabel": "backend/uploads/clientes · JPG / PNG / WEBP", "pos": [1040, 340], "size": [220, 76] }
+  ],
+  "connections": [
+    { "id": "staff-browser", "from": "staff", "to": "browser", "label": "captura datos y foto" },
+    { "id": "browser-api", "from": "browser", "to": "api", "label": "login · formulario multipart", "variant": "emphasis" },
+    { "id": "api-mysql", "from": "api", "to": "mysql", "label": "valida rol · busca e inserta cliente", "variant": "security" },
+    { "id": "mysql-api", "from": "mysql", "to": "api", "label": "duplicado → 409", "variant": "dashed" },
+    { "id": "api-images", "from": "api", "to": "images", "label": "guarda imagen validada" },
+    { "id": "api-browser", "from": "api", "to": "browser", "label": "201 creado · errores 401 / 403 / 400", "variant": "dashed", "labelDy": -60 }
+  ],
+  "cards": [
+    { "dot": "rose", "title": "Control de acceso", "items": ["Cookie HttpOnly SameSite=Lax con vencimiento de 8 horas.", "El backend vuelve a consultar el rol actual en MySQL.", "Solo ADMINISTRADOR y RECEPCIONISTA; el servidor rechaza sin sesión (401) o sin rol (403)."] },
+    { "dot": "cyan", "title": "Validación y fotografía", "items": ["Campos, correo, teléfonos, fecha de nacimiento, longitudes y código postal se validan en backend.", "Solo JPG, PNG y WEBP; máximo 5 MB; extensión, MIME y firma binaria comprobados.", "Nombre de almacenamiento generado con UUID; archivos fuera del código ejecutable de la app."] },
+    { "dot": "emerald", "title": "Duplicados", "items": ["Correo y teléfono personal se detectan antes del alta.", "Índices UNIQUE en ambos campos cubren solicitudes simultáneas.", "La migración backend/schema-clientes.sql crea la tabla y sus restricciones."] }
+  ]
+}

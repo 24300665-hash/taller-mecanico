@@ -51,6 +51,54 @@
           <p class="security">◈ Acceso protegido y conexión cifrada.</p>
         </div>
 
+        <div id="client-view" class="workspace" hidden>
+          <aside class="workspace-sidebar" aria-label="Perfil y clientes registrados">
+            <div class="staff-profile">
+              <div class="profile-avatar" id="staff-avatar" aria-hidden="true">TP</div>
+              <div><p class="eyebrow">SESIÓN ACTIVA</p><h2 id="staff-name">Usuario</h2><span class="role-badge" id="staff-role">Personal</span></div>
+            </div>
+            <div class="client-list-heading"><div><p class="eyebrow">DIRECTORIO</p><h2>Clientes</h2></div><span id="client-count" class="client-count">0</span></div>
+            <p id="client-list-message" class="sidebar-message" role="status" aria-live="polite">Cargando clientes…</p>
+            <nav id="client-list" class="client-list" aria-label="Clientes registrados"></nav>
+          </aside>
+
+          <section class="workspace-content">
+            <header class="workspace-header">
+              <div class="brand"><span class="brand-mark">TP</span><span>TALLER<span>PRO</span></span></div>
+              <div class="workspace-actions"><button type="button" class="link" id="new-client-button">+ Nuevo cliente</button><button type="button" class="back" id="back-to-login">← Cerrar registro</button></div>
+            </header>
+
+            <div id="client-form-panel" class="client-form-panel">
+              <p class="eyebrow">GESTIÓN DE CLIENTES</p>
+              <h2>Registrar cliente</h2>
+              <p class="intro">Completa los datos del cliente. Los campos marcados con * son obligatorios.</p>
+              <form id="client-form" novalidate>
+            <div class="field"><label for="client-name">Nombre completo *</label><input id="client-name" name="nombre_completo" type="text" maxlength="150" required></div>
+            <div class="field"><label for="client-alt">Contacto alternativo</label><input id="client-alt" name="contacto_alternativo" type="text" maxlength="120"></div>
+            <div class="field"><label for="client-birth">Fecha de nacimiento *</label><input id="client-birth" name="fecha_nacimiento" type="date" required></div>
+            <div class="field"><label for="client-phone">Teléfono personal *</label><input id="client-phone" name="telefono_personal" type="tel" maxlength="20" required></div>
+            <div class="field"><label for="client-work-phone">Teléfono de trabajo</label><input id="client-work-phone" name="telefono_trabajo" type="tel" maxlength="20"></div>
+            <div class="field"><label for="client-email">Correo electrónico *</label><input id="client-email" name="correo_electronico" type="email" maxlength="254" required></div>
+            <div class="field"><label for="client-photo">Fotografía * (JPG, PNG o WEBP; máximo 5 MB)</label><input id="client-photo" name="fotografia" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" required></div>
+            <h3>Dirección</h3>
+            <div class="field"><label for="client-street">Calle *</label><input id="client-street" name="calle" type="text" maxlength="150" required></div>
+            <div class="field"><label for="client-neighborhood">Colonia *</label><input id="client-neighborhood" name="colonia" type="text" maxlength="100" required></div>
+            <div class="field"><label for="client-city">Municipio *</label><input id="client-city" name="municipio" type="text" maxlength="100" required></div>
+            <div class="field"><label for="client-state">Estado *</label><input id="client-state" name="estado" type="text" maxlength="100" required></div>
+            <div class="field"><label for="client-postal">Código postal *</label><input id="client-postal" name="codigo_postal" type="text" inputmode="numeric" maxlength="5" required></div>
+            <section class="vehicle-form-section" aria-labelledby="vehicle-heading">
+              <div class="vehicle-heading-row"><div><h3 id="vehicle-heading">Vehículos del cliente *</h3><p class="vehicle-help">Registra al menos un vehículo. Todos los datos son obligatorios excepto el kilometraje.</p></div><button type="button" class="link" id="add-vehicle-button">+ Agregar vehículo</button></div>
+              <div id="vehicle-rows"></div>
+            </section>
+            <p id="client-message" class="message" role="status" aria-live="polite"></p>
+            <button class="primary" type="submit">Guardar cliente <span>→</span></button>
+              </form>
+            </div>
+
+            <article id="client-details" class="client-details" hidden></article>
+          </section>
+        </div>
+
         <div id="recovery-view" hidden>
           <button type="button" class="back" data-view="login">← Volver a iniciar sesión</button>
           <p class="eyebrow">RECUPERAR ACCESO</p>
@@ -70,6 +118,7 @@
       </div>
     </section>
   </main>
+  <script src="vehicle-catalog.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
