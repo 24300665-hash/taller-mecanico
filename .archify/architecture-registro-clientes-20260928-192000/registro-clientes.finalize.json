@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-09-29T00:24:29.665Z",
+  "specification": {
+    "path": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/candidate.json",
+    "sha256": "efeab7fa074be474f41775a0d23af82e8e8a403759f67070674c85aa40445212",
+    "bytes": 2779
+  },
+  "artifact": {
+    "path": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+    "sha256": "0e040e2d020b7e543011d6ce5cbaa1e6ab53dde8ab76f11681b33383092ab93d",
+    "bytes": 755876
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "/home/keko/.nvm/versions/node/v20.20.2/bin/node",
+        "/home/keko/Escritorio/taller_mecanico/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/candidate.json",
+        "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "efeab7fa074be474f41775a0d23af82e8e8a403759f67070674c85aa40445212",
+          "bytes": 2779
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 445,
+      "command": [
+        "/home/keko/.nvm/versions/node/v20.20.2/bin/node",
+        "/home/keko/Escritorio/taller_mecanico/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/candidate.json",
+        "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "526b64a4-77af-4175-bc9a-a5d9dd163114",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/candidate.json",
+        "output": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+        "specification": {
+          "sha256": "efeab7fa074be474f41775a0d23af82e8e8a403759f67070674c85aa40445212",
+          "bytes": 2779
+        },
+        "artifact": {
+          "sha256": "0e040e2d020b7e543011d6ce5cbaa1e6ab53dde8ab76f11681b33383092ab93d",
+          "bytes": 755876
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "stderr": "archify: meta.locale \"es\" has no built-in catalog and no meta.translations; the Viewer chrome and <html lang> fall back to English."
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 178,
+      "command": [
+        "/home/keko/.nvm/versions/node/v20.20.2/bin/node",
+        "/home/keko/Escritorio/taller_mecanico/.agents/skills/archify/bin/archify.mjs",
+        "check",
+        "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+        "artifact": {
+          "sha256": "0e040e2d020b7e543011d6ce5cbaa1e6ab53dde8ab76f11681b33383092ab93d",
+          "bytes": 755876
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 0,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 8.9,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 6.2,
+            "maxBends": 4,
+            "routesOverSuggestedBends": 2,
+            "maxStretch": 1.176,
+            "routesOverSuggestedStretch": 0,
+            "minSegmentPx": 16,
+            "minInteriorSegmentPx": 16,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [],
+            "detours": [
+              {
+                "relationship": {
+                  "id": "browser-api",
+                  "from": "browser",
+                  "to": "api",
+                  "label": "login · formulario multipart",
+                  "collectionIndex": 1,
+                  "artifactIndex": 2
+                },
+                "bends": 4,
+                "stretch": 1.176
+              },
+              {
+                "relationship": {
+                  "id": "api-browser",
+                  "from": "api",
+                  "to": "browser",
+                  "label": "201 creado · errores 401 / 403 / 400",
+                  "collectionIndex": 5,
+                  "artifactIndex": 6
+                },
+                "bends": 4,
+                "stretch": 1.176
+              }
+            ]
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 110,
+            "emptyTopRatio": 0.227,
+            "occupiedTop": 110,
+            "viewBoxTop": 0,
+            "canvasHeight": 484,
+            "typicalNodeHeight": 76,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "recognized-declared-wide",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 1300,
+            "actualBudgetPx": 1300,
+            "actualReaderWidth": 1330,
+            "desiredReaderWidth": 1330,
+            "viewportCap": 1376,
+            "limit": "source-size",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": false,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "node",
+              "id": "staff"
+            },
+            "minimumSourceTextPx": 6.2,
+            "minimumProjectedTextPx": 6.2,
+            "semanticTextCount": 16
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "526b64a4-77af-4175-bc9a-a5d9dd163114"
+      }
+    },
+    "browser-check": {
+      "status": "skipped",
+      "exitCode": 2,
+      "durationMs": 22,
+      "command": [
+        "/home/keko/.nvm/versions/node/v20.20.2/bin/node",
+        "/home/keko/Escritorio/taller_mecanico/.agents/skills/archify/bin/archify.mjs",
+        "browser-check",
+        "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "skipped",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "526b64a4-77af-4175-bc9a-a5d9dd163114",
+        "artifact": {
+          "path": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+          "sha256": "0e040e2d020b7e543011d6ce5cbaa1e6ab53dde8ab76f11681b33383092ab93d",
+          "bytes": 755876
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "unavailable",
+          "executable": null
+        },
+        "diagnostics": [
+          {
+            "code": "viewer/chrome-unavailable",
+            "severity": "warning",
+            "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+            "subject": {
+              "artifact": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html"
+            },
+            "evidence": {
+              "executable": null
+            },
+            "supportedFixes": [
+              "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+            ]
+          }
+        ],
+        "containment": {
+          "status": "skipped",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": []
+        },
+        "themeStates": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "readability": {
+          "status": "skipped",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": []
+        },
+        "viewerChrome": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "registro-clientes.browser-check.json",
+          "files": []
+        },
+        "error": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path."
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.finalize.json",
+    "summaryReceipt": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.finalize-summary.json",
+    "browserCheckReceipt": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "browser-check",
+  "finishedAt": "2026-09-29T00:24:30.435Z",
+  "durationMs": 769,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-09-29T00:23:39.280Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

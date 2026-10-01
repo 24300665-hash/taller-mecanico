@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/candidate.json",
+    "sha256": "efeab7fa074be474f41775a0d23af82e8e8a403759f67070674c85aa40445212",
+    "bytes": 2779
+  },
+  "artifact": {
+    "path": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+    "sha256": "0e040e2d020b7e543011d6ce5cbaa1e6ab53dde8ab76f11681b33383092ab93d",
+    "bytes": 755876
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "skipped"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "Chrome or Chromium is unavailable. Set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome or Chromium executable and rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.finalize.json",
+    "summaryReceipt": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.finalize-summary.json",
+    "browserCheckReceipt": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-09-29T00:23:39.280Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 769
+}

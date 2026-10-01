@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "526b64a4-77af-4175-bc9a-a5d9dd163114",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/candidate.json",
+  "output": "/home/keko/Escritorio/taller_mecanico/.archify/architecture-registro-clientes-20260928-192000/registro-clientes.html",
+  "specification": {
+    "sha256": "efeab7fa074be474f41775a0d23af82e8e8a403759f67070674c85aa40445212",
+    "bytes": 2779
+  },
+  "artifact": {
+    "sha256": "0e040e2d020b7e543011d6ce5cbaa1e6ab53dde8ab76f11681b33383092ab93d",
+    "bytes": 755876
+  }
+}
