@@ -1,7 +1,4 @@
-(function exposeVehicleCatalog(root, catalog) {
-  if (typeof module === 'object' && module.exports) module.exports = catalog;
-  else root.TallerVehicleCatalog = catalog;
-})(globalThis, {
+const vehicleCatalog = {
   Acura: ['Integra', 'MDX', 'RDX', 'TLX', 'ZDX'], Audi: ['A3', 'A4', 'A5', 'A6', 'Q3', 'Q5', 'Q7', 'Q8', 'e-tron'],
   BMW: ['Serie 1', 'Serie 2', 'Serie 3', 'Serie 4', 'Serie 5', 'X1', 'X3', 'X5', 'X6', 'iX'],
   Buick: ['Enclave', 'Encore', 'Envision', 'Envista'], BYD: ['Dolphin', 'King', 'Seagull', 'Shark', 'Song Plus', 'Tang', 'Yuan Plus'],
@@ -26,4 +23,10 @@
   Toyota: ['Avanza', 'Camry', 'Corolla', 'Corolla Cross', 'Hilux', 'RAV4', 'Sienna', 'Tacoma', 'Yaris'],
   Volkswagen: ['Amarok', 'Golf', 'Jetta', 'Nivus', 'Taigun', 'T-Cross', 'Tiguan', 'Vento', 'Virtus'],
   Volvo: ['EX30', 'S60', 'XC40', 'XC60', 'XC90'], Zeekr: ['001', 'X']
-});
+};
+
+// Conserva la disponibilidad global mientras el código de la interfaz se
+// migra a componentes de Vue.
+globalThis.TallerVehicleCatalog = vehicleCatalog;
+
+export default vehicleCatalog;

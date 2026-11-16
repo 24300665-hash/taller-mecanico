@@ -4,6 +4,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "test:demo": "node scripts/smoke-demo.js",
+    "update:geography": "node scripts/update-geography-catalog.js",
+    "update:postal-codes": "node scripts/update-postal-code-catalog.js",
     "start": "node server.js"
   },
   "keywords": [],

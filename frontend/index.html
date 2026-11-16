@@ -8,9 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <aside id="demo-mode-banner" class="demo-mode-banner" role="status" hidden></aside>
+  <div id="vue-runtime" hidden></div>
+  <div id="app">
   <main class="auth-layout">
     <section class="brand-panel" aria-label="Información del sistema">
       <div class="brand"><span class="brand-mark">TP</span><span>TALLER<span>PRO</span></span></div>
@@ -24,7 +26,7 @@
         <p><b>✓</b> Seguimiento de órdenes en tiempo real</p>
         <p><b>✓</b> Información protegida por roles</p>
       </div>
-      <small>© <span id="year"></span> TallerPro. Gestión profesional.</small>
+      <small>© <span id="year">{{ year }}</span> TallerPro. Gestión profesional.</small>
     </section>
 
     <section class="form-panel">
@@ -57,9 +59,13 @@
               <div class="profile-avatar" id="staff-avatar" aria-hidden="true">TP</div>
               <div><p class="eyebrow">SESIÓN ACTIVA</p><h2 id="staff-name">Usuario</h2><span class="role-badge" id="staff-role">Personal</span></div>
             </div>
+            <nav class="workspace-menu" aria-label="Administración"><button type="button" id="show-clients-button" class="workspace-menu-item selected">Clientes</button><button type="button" id="show-create-client-button" class="workspace-menu-item">Crear clientes</button><button type="button" id="show-create-workshop-button" class="workspace-menu-item">Crear talleres</button><button type="button" id="show-vehicle-search-button" class="workspace-menu-item">Consultar vehículo</button><button type="button" id="show-vehicles-button" class="workspace-menu-item">Vehículos</button><button type="button" id="show-statuses-button" class="workspace-menu-item">Estatus e historial</button></nav>
             <div class="client-list-heading"><div><p class="eyebrow">DIRECTORIO</p><h2>Clientes</h2></div><span id="client-count" class="client-count">0</span></div>
+            <label class="sidebar-filter">Taller<select id="client-workshop-filter"><option value="">Todos los talleres</option></select></label>
+            <label class="sidebar-filter">Orden por nombre<select id="client-sort"><option value="asc">Ascendente</option><option value="desc">Descendente</option></select></label>
             <p id="client-list-message" class="sidebar-message" role="status" aria-live="polite">Cargando clientes…</p>
             <nav id="client-list" class="client-list" aria-label="Clientes registrados"></nav>
+            <div class="pagination"><button type="button" id="previous-page">Anterior</button><span id="page-label">Página 1 de 1</span><button type="button" id="next-page">Siguiente</button></div>
           </aside>
 
           <section class="workspace-content">
@@ -68,32 +74,106 @@
               <div class="workspace-actions"><button type="button" class="link" id="new-client-button">+ Nuevo cliente</button><button type="button" class="back" id="back-to-login">← Cerrar registro</button></div>
             </header>
 
-            <div id="client-form-panel" class="client-form-panel">
+            <section id="client-directory-panel" class="client-form-panel">
+              <p class="eyebrow">DIRECTORIO</p><h2>Clientes registrados</h2>
+              <p class="intro">Clientes del taller seleccionado en el filtro. Selecciona un cliente para consultar y editar sus datos.</p>
+              <div class="table-scroll"><table class="client-directory-table"><thead><tr><th>Cliente</th><th>Taller</th><th>Estatus</th><th>Contacto</th></tr></thead><tbody id="client-directory-list"></tbody></table></div>
+            </section>
+
+            <div id="client-form-panel" class="client-form-panel" hidden>
               <p class="eyebrow">GESTIÓN DE CLIENTES</p>
               <h2>Registrar cliente</h2>
               <p class="intro">Completa los datos del cliente. Los campos marcados con * son obligatorios.</p>
               <form id="client-form" novalidate>
+            <div class="field"><label for="client-workshop">Taller *</label><select id="client-workshop" name="taller_id" required disabled><option value="">Cargando talleres…</option></select><small id="client-workshop-help">Los clientes nuevos requieren un taller registrado.</small></div>
             <div class="field"><label for="client-name">Nombre completo *</label><input id="client-name" name="nombre_completo" type="text" maxlength="150" required></div>
             <div class="field"><label for="client-alt">Contacto alternativo</label><input id="client-alt" name="contacto_alternativo" type="text" maxlength="120"></div>
             <div class="field"><label for="client-birth">Fecha de nacimiento *</label><input id="client-birth" name="fecha_nacimiento" type="date" required></div>
-            <div class="field"><label for="client-phone">Teléfono personal *</label><input id="client-phone" name="telefono_personal" type="tel" maxlength="20" required></div>
-            <div class="field"><label for="client-work-phone">Teléfono de trabajo</label><input id="client-work-phone" name="telefono_trabajo" type="tel" maxlength="20"></div>
+            <div class="field"><label for="client-phone">Teléfono personal *</label><input id="client-phone" name="telefono_personal" type="tel" inputmode="numeric" minlength="10" maxlength="10" pattern="[0-9]{10}" title="Ingresa exactamente 10 dígitos" required></div>
+            <div class="field"><label for="client-work-phone">Teléfono de trabajo</label><input id="client-work-phone" name="telefono_trabajo" type="tel" inputmode="numeric" minlength="10" maxlength="10" pattern="[0-9]{10}" title="Ingresa exactamente 10 dígitos"></div>
             <div class="field"><label for="client-email">Correo electrónico *</label><input id="client-email" name="correo_electronico" type="email" maxlength="254" required></div>
             <div class="field"><label for="client-photo">Fotografía * (JPG, PNG o WEBP; máximo 5 MB)</label><input id="client-photo" name="fotografia" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" required></div>
             <h3>Dirección</h3>
             <div class="field"><label for="client-street">Calle *</label><input id="client-street" name="calle" type="text" maxlength="150" required></div>
             <div class="field"><label for="client-neighborhood">Colonia *</label><input id="client-neighborhood" name="colonia" type="text" maxlength="100" required></div>
-            <div class="field"><label for="client-city">Municipio *</label><input id="client-city" name="municipio" type="text" maxlength="100" required></div>
-            <div class="field"><label for="client-state">Estado *</label><input id="client-state" name="estado" type="text" maxlength="100" required></div>
-            <div class="field"><label for="client-postal">Código postal *</label><input id="client-postal" name="codigo_postal" type="text" inputmode="numeric" maxlength="5" required></div>
-            <section class="vehicle-form-section" aria-labelledby="vehicle-heading">
+            <div class="field"><label for="client-state">Estado *</label><select id="client-state" name="estado" required disabled><option value="">Cargando estados…</option></select></div>
+            <div class="field"><label for="client-city">Municipio *</label><select id="client-city" name="municipio" required disabled><option value="">Selecciona primero un estado</option></select></div>
+            <p id="geography-message" class="message" role="status" aria-live="polite"></p>
+            <div class="field"><label for="client-postal">Código postal *</label><input id="client-postal" name="codigo_postal" type="text" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" required><small>Ingresa cinco números; el estado y municipio se completan con el catálogo SEPOMEX.</small></div>
+            <section class="vehicle-form-section" aria-labelledby="vehicle-heading" hidden>
               <div class="vehicle-heading-row"><div><h3 id="vehicle-heading">Vehículos del cliente *</h3><p class="vehicle-help">Registra al menos un vehículo. Todos los datos son obligatorios excepto el kilometraje.</p></div><button type="button" class="link" id="add-vehicle-button">+ Agregar vehículo</button></div>
               <div id="vehicle-rows"></div>
             </section>
             <p id="client-message" class="message" role="status" aria-live="polite"></p>
-            <button class="primary" type="submit">Guardar cliente <span>→</span></button>
+            <button class="primary" type="submit" disabled>Guardar cliente <span>→</span></button>
               </form>
             </div>
+
+            <section id="workshop-form-panel" class="client-form-panel" hidden>
+              <p class="eyebrow">ADMINISTRACIÓN</p><h2>Crear taller</h2>
+              <p class="intro">Registra los datos del taller.</p>
+              <form id="workshop-form" novalidate>
+                <div class="field"><label for="workshop-name">Nombre del taller *</label><input id="workshop-name" name="nombre" maxlength="150" required></div>
+                <div class="field"><label for="workshop-address">Dirección completa *</label><input id="workshop-address" name="direccion" maxlength="255" required></div>
+                <div class="field"><label for="workshop-company">Razón social *</label><input id="workshop-company" name="razon_social" maxlength="180" required></div>
+                <div class="field"><label for="workshop-phone">Teléfono *</label><input id="workshop-phone" name="telefono" type="tel" inputmode="numeric" minlength="10" maxlength="10" pattern="[0-9]{10}" title="Ingresa exactamente 10 dígitos" required></div>
+                <div class="field"><label for="workshop-rfc">RFC *</label><input id="workshop-rfc" name="rfc" maxlength="13" pattern="([A-Za-zÑñ&]{3}[0-9]{6}[A-Za-z0-9]{3}|[A-Za-zÑñ&]{4}[0-9]{6}[A-Za-z0-9]{3})" required></div>
+                <div class="field"><label for="workshop-email">Correo de contacto *</label><input id="workshop-email" name="correo_contacto" type="email" maxlength="254" required></div>
+                <div class="field"><label for="workshop-photo">Fotografía del taller * (JPG, PNG o WEBP; máximo 15 MB)</label><input id="workshop-photo" name="fotografia" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" required></div>
+                <p id="workshop-message" class="message" role="status" aria-live="polite"></p>
+                <button class="primary" type="submit">Guardar taller <span>→</span></button>
+              </form>
+            </section>
+
+            <section id="vehicle-admin-panel" class="client-form-panel" hidden>
+              <p class="eyebrow">FLOTA</p><h2>Vehículos</h2>
+              <p class="intro">Asocia vehículos a clientes activos. La baja conserva el registro y su historial.</p>
+              <form id="vehicle-admin-form" class="vehicle-admin-form" novalidate>
+                <div class="field"><label for="vehicle-owner">Cliente activo *</label><select id="vehicle-owner" required><option value="">Cargando clientes…</option></select></div>
+                <div class="vehicle-grid">
+                  <label class="vehicle-field">Marca *<select id="vehicle-admin-make" required><option value="">Selecciona una marca</option></select></label>
+                  <label class="vehicle-field">Modelo *<select id="vehicle-admin-model" required disabled><option value="">Selecciona primero la marca</option></select></label>
+                  <label class="vehicle-field">Año *<select id="vehicle-admin-year" required><option value="">Selecciona un año</option></select></label>
+                  <label class="vehicle-field">Versión *<input id="vehicle-admin-version" maxlength="80" required></label>
+                  <label class="vehicle-field">Placas *<input id="vehicle-admin-plates" maxlength="15" minlength="3" pattern="[A-Za-z0-9 -]{3,15}" title="Usa de 3 a 15 letras o números; espacios y guiones se normalizan" required></label>
+                  <label class="vehicle-field">Color *<input id="vehicle-admin-color" maxlength="40" required></label>
+                  <label class="vehicle-field">VIN *<input id="vehicle-admin-vin" maxlength="17" minlength="17" pattern="[A-HJ-NPR-Z0-9a-hj-npr-z]{17}" title="17 caracteres; no se permiten I, O ni Q" required></label>
+                  <label class="vehicle-field">Número de serie<input id="vehicle-admin-serial" maxlength="80" pattern="[A-Za-z0-9-]{3,80}"></label>
+                  <label class="vehicle-field">Kilometraje<input id="vehicle-admin-mileage" type="number" min="0" max="2000000" step="1"></label>
+                </div>
+                <p id="vehicle-admin-message" class="message" role="status" aria-live="polite"></p>
+                <button class="primary" type="submit">Guardar vehículo <span>→</span></button>
+                <button id="vehicle-edit-cancel" type="button" class="link" hidden>Cancelar edición</button>
+              </form>
+              <div class="table-scroll"><table class="client-directory-table"><thead><tr><th>Vehículo</th><th>Cliente</th><th>Taller</th><th>VIN</th><th>Placas</th><th>Estatus</th><th>Acciones</th></tr></thead><tbody id="vehicle-admin-list"></tbody></table></div>
+            </section>
+
+            <section id="vehicle-search-panel" class="client-form-panel" hidden>
+              <p class="eyebrow">CONSULTA VIP</p><h2>Consultar vehículo</h2>
+              <p class="intro">Busca por placas para identificar el vehículo, el cliente y el taller al que está asociado.</p>
+              <form id="vehicle-search-form" class="vehicle-search-form" novalidate>
+                <label for="vehicle-search-plates">Placas del vehículo</label>
+                <div class="vehicle-search-controls"><input id="vehicle-search-plates" type="text" maxlength="15" pattern="[A-Za-z0-9 -]{3,15}" placeholder="Ej. ABC-123-A" autocomplete="off" required><button class="secondary-button" type="submit">Consultar</button><button id="vehicle-search-clear" class="link" type="button" hidden>Limpiar</button></div>
+                <p id="vehicle-search-message" class="message" role="status" aria-live="polite"></p>
+              </form>
+              <div class="table-scroll"><table class="client-directory-table"><thead><tr><th>Vehículo</th><th>Cliente</th><th>Taller</th><th>VIN</th><th>Placas</th><th>Estatus</th></tr></thead><tbody id="vehicle-search-list"></tbody></table></div>
+            </section>
+
+            <section id="status-admin-panel" class="client-form-panel" hidden>
+              <p class="eyebrow">CONFIGURACIÓN</p><h2>Catálogo de estatus</h2>
+              <p class="intro">Administra las etiquetas del sistema. Al deshabilitar un estatus, su registro se conserva.</p>
+              <form id="status-admin-form" novalidate>
+                <div class="field"><label for="status-value">Valor *</label><input id="status-value" maxlength="40" pattern="[A-Za-zÁÉÍÓÚÜÑáéíóúüñ][A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9_ -]{1,39}" required></div>
+                <div class="field"><label for="status-description">Descripción *</label><input id="status-description" maxlength="255" required></div>
+                <label class="remember"><input id="status-available" type="checkbox" checked> Disponible</label>
+                <p id="status-admin-message" class="message" role="status" aria-live="polite"></p>
+                <button class="primary" type="submit">Guardar estatus <span>→</span></button>
+                <button id="status-edit-cancel" type="button" class="link" hidden>Cancelar edición</button>
+              </form>
+              <div class="table-scroll"><table class="client-directory-table"><thead><tr><th>ID</th><th>Valor</th><th>Descripción</th><th>Disponible</th><th>Referencias</th><th>Acciones</th></tr></thead><tbody id="status-admin-list"></tbody></table></div>
+              <h3>Actualizaciones recientes</h3>
+              <div class="table-scroll"><table class="client-directory-table"><thead><tr><th>Fecha</th><th>Entidad</th><th>ID</th><th>Acción</th><th>Usuario</th><th>Detalle</th></tr></thead><tbody id="status-history-list"></tbody></table></div>
+            </section>
 
             <article id="client-details" class="client-details" hidden></article>
           </section>
@@ -118,7 +198,7 @@
       </div>
     </section>
   </main>
-  <script src="vehicle-catalog.js"></script>
-  <script src="app.js"></script>
+  </div>
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>
